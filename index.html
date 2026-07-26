@@ -2563,7 +2563,9 @@ function calcAutopilot(amount) {
     const halfFixed = FIXED_MONTHLY / 2;
     let carExtra, savings, travel, life, business;
 
-    if (amount < 1300) {
+    if (amount <= 0) {
+        carExtra = 0; savings = 0; travel = 0; life = 0; business = 0;
+    } else if (amount < 1300) {
         carExtra = 50; savings = 0; travel = 0; life = 200; business = 0;
     } else if (amount < 1650) {
         carExtra = 150; savings = 75; travel = 100; life = 300; business = 100;
@@ -2715,8 +2717,8 @@ function renderSavings() {
         const total = Array.from(document.querySelectorAll('.goal-amount-input'))
             .reduce((s, el) => s + (parseFloat(el.value) || 0), 0);
 
-        const bnb1 = gv('trip-bnb', 0); const flight1 = gv('trip-flight', 350);
-        const food1 = gv('trip-food', 350); const buf1 = gv('trip-buffer', 100);
+        const bnb1 = gv('trip-bnb', 0); const flight1 = gv('trip-flight', 0);
+        const food1 = gv('trip-food', 0); const buf1 = gv('trip-buffer', 0);
         const trip1Total = bnb1 + flight1 + food1 + buf1;
         const afterTrip1 = total - trip1Total;
         set('trip1-total', formatCurrency(trip1Total));
